@@ -51,6 +51,7 @@
             btnCancelar.TabIndex = 23;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // txtCalle
             // 
@@ -102,6 +103,7 @@
             btnMasInfo.TabIndex = 17;
             btnMasInfo.Text = "Agregar información de contacto";
             btnMasInfo.UseVisualStyleBackColor = true;
+            btnMasInfo.Click += btnMasInfo_Click;
             // 
             // lblTel
             // 
@@ -120,6 +122,7 @@
             btnAceptar.TabIndex = 15;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
+            btnAceptar.Click += btnAceptar_Click;
             // 
             // txtUser
             // 

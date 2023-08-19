@@ -16,5 +16,22 @@ namespace PrecargadoDeInformacion.GUI
         {
             InitializeComponent();
         }
+
+        private void regresarAgregarUsuario()
+        {
+            AgregarUsuario agregarUsuario = new AgregarUsuario();
+            agregarUsuario.Show(Owner);
+            Close();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            regresarAgregarUsuario();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            regresarAgregarUsuario();
+        }
     }
 }

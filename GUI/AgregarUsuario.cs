@@ -16,5 +16,28 @@ namespace PrecargadoDeInformacion.GUI
         {
             InitializeComponent();
         }
+
+        private void regresarAlListado()
+        {
+            Owner.Show();
+            Close();
+        }
+
+        private void btnMasInfo_Click(object sender, EventArgs e)
+        {
+            InformacionUsuario informacionUsuario = new InformacionUsuario();
+            informacionUsuario.Show(Owner);
+            Close();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            regresarAlListado();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            regresarAlListado();
+        }
     }
 }
