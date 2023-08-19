@@ -13,27 +13,36 @@ namespace PrecargadoDeInformacion.GUI
 {
     public partial class InformacionUsuario : Form
     {
-        Usuario usuario;
-        string user;
-        int id;
+        Usuario usuario = new Usuario();
+        bool ingresar;
 
-        public InformacionUsuario(string user)
+        public InformacionUsuario(string user, int tel, string mail, string calle, int nroPuerta, bool ingresar)
         {
             InitializeComponent();
-            this.user = user;
-            usuario = new Usuario();
+            usuario.Nombre = user;
+            usuario.Tel = tel;
+            usuario.Mail = mail;
+            usuario.Calle = calle;
+            usuario.NroPuerta = nroPuerta;
+            this.ingresar = ingresar;
         }
 
-        public InformacionUsuario(int id)
+        public InformacionUsuario(int id, string user, int tel, string mail, string calle, int nroPuerta, bool ingresar)
         {
             InitializeComponent();
-            this.id = id;
-            usuario = new Usuario();
+            usuario.Id = id;
+            usuario.Nombre = user;
+            usuario.Tel = tel;
+            usuario.Mail = mail;
+            usuario.Calle = calle;
+            usuario.NroPuerta = nroPuerta;
+            this.ingresar = ingresar;
+            cargarDatos();
         }
 
         private void regresarAgregarUsuario()
         {
-            AgregarUsuario agregarUsuario = new AgregarUsuario();
+            AgregarUsuario agregarUsuario = new AgregarUsuario(this.ingresar);
             agregarUsuario.Show(Owner);
             Close();
         }
@@ -46,6 +55,13 @@ namespace PrecargadoDeInformacion.GUI
                 lbl.ForeColor = Color.Red;
         }
 
+        private void cargarDatos()
+        {
+            txtTel.Text = usuario.Tel.ToString();
+            txtMail.Text = usuario.Mail;
+            txtCalle.Text = usuario.Calle;
+            txtPuerta.Text = usuario.NroPuerta.ToString();
+        }
 
         private bool validarDatos()
         {
@@ -60,12 +76,12 @@ namespace PrecargadoDeInformacion.GUI
             return tel && mail && calle && nroPuerta;
         }
 
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (validarDatos())
             {
-                AgregarUsuario agregarUsuario = new AgregarUsuario(this.user, txtTel.Text, txtMail.Text, txtCalle.Text, txtPuerta.Text);
+                Usuario newUser = usuario.crearUsuario(txtNombre.Text, txtTel.Text, txtMail.Text, txtCalle.Text, txtPuerta.Text);
+                AgregarUsuario agregarUsuario = new AgregarUsuario(newUser.Nombre, newUser.Tel, newUser.Mail, newUser.Calle, newUser.NroPuerta, this.ingresar);
                 agregarUsuario.Show(Owner);
                 Close();
             }

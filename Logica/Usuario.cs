@@ -16,7 +16,8 @@ namespace PrecargadoDeInformacion.Logica
         private int id, tel, nroPuerta;
 
         /// -------------------------- CONSTRUCTORES --------------------------------
-        public Usuario() {}
+        
+        public Usuario() { }
 
         public Usuario(int id, string nombre, int tel, string mail, string calle, int nroPuerta)
         {
@@ -120,29 +121,25 @@ namespace PrecargadoDeInformacion.Logica
             return db.obtenerUsuarios();
         }
 
-        public bool crearUsuario(string nombre, string tel, string mail, string calle, string nroPuerta)
+        public Usuario crearUsuario(string nombre, string tel, string mail, string calle, string nroPuerta)
         {
-            try
-            {
-                Usuario usuario = new Usuario();
-                usuario.Nombre = nombre;
-                usuario.Tel = Int32.Parse(tel);
-                usuario.Mail = mail;
-                usuario.Calle = calle;
-                usuario.NroPuerta = Int32.Parse(nroPuerta);
-                return ingresarUsuario(usuario);
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            Usuario usuario = new Usuario();
+            usuario.Nombre = nombre;
+            usuario.Tel = Int32.Parse(tel);
+            usuario.Mail = mail;
+            usuario.Calle = calle;
+            usuario.NroPuerta = Int32.Parse(nroPuerta);
+            return usuario;
         }
 
-        private bool ingresarUsuario(Usuario usuario)
+        public bool ingresarUsuario(Usuario usuario)
         {
-            return db.ingresarUsuario(usuario.Nombre, usuario.Tel, usuario.Mail, usuario.Calle, usuario.NroPuerta);
+            return db.ingresarUsuario(usuario);
         }
 
-
+        public bool modificarUsuario(Usuario usuario)
+        {
+            return db.modificarUsuario(usuario);
+        }
     }
 }

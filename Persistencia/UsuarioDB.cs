@@ -7,6 +7,7 @@ using System.Windows.Forms.VisualStyles;
 using PrecargadoDeInformacion.Logica;
 using MySqlConnector;
 using Org.BouncyCastle.Utilities.Collections;
+using Microsoft.VisualBasic;
 
 namespace PrecargadoDeInformacion.Persistencia
 {
@@ -46,7 +47,7 @@ namespace PrecargadoDeInformacion.Persistencia
             return usuarios;
         }
 
-        public bool ingresarUsuario(string nombre, int tel, string mail, string calle, int nroPuerta)
+        public bool ingresarUsuario(Usuario usuario)
         {
             try
             {
@@ -54,7 +55,7 @@ namespace PrecargadoDeInformacion.Persistencia
                 conexion.Open();
 
                 string query = "INSERT INTO usuario(nombre, tel, mail, calle, nroPuerta) VALUES('" +
-                    nombre + "', " + tel + ", '" + mail + "', '" + calle + "', " + nroPuerta + ");";
+                    usuario.Nombre + "', " + usuario.Tel + ", '" + usuario.Mail + "', '" + usuario.Calle + "', " + usuario.NroPuerta + ");";
 
                 MySqlCommand command = new MySqlCommand(query, conexion);
                 command.ExecuteNonQuery();
@@ -67,5 +68,29 @@ namespace PrecargadoDeInformacion.Persistencia
             }
         }
         
+
+        public bool modificarUsuario(Usuario usuario)
+        {
+            try
+            {
+                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+                conexion.Open();
+
+                string query = "UPDATE usuario SET nombre = '" + usuario.Nombre + "', tel = " + usuario.Tel + ", mail = '" +
+                usuario.Mail + "', calle = '" + usuario.Calle + "', nroPuerta = " + usuario.NroPuerta + " WHERE id = " + usuario.Id + ";";
+
+                MySqlCommand command = new MySqlCommand(query, conexion);
+
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
+
+        }
+
     }
 }
