@@ -37,12 +37,6 @@ namespace PrecargadoDeInformacion.GUI
             txtNroPuerta.Text = nroPuerta;
         }
 
-        private void regresarAlListado()
-        {
-            Owner.Show();
-            Close();
-        }
-
         private void btnMasInfo_Click(object sender, EventArgs e)
         {
             InformacionUsuario informacionUsuario = new InformacionUsuario(txtUser.Text);
@@ -54,8 +48,11 @@ namespace PrecargadoDeInformacion.GUI
         {
             if (usuario.validarNombre(txtUser.Text))
             {
+                usuario.crearUsuario(txtUser.Text, txtTel.Text, txtMail.Text, txtCalle.Text, txtNroPuerta.Text);
                 MessageBox.Show("Se guardaron los datos");
-                regresarAlListado();
+                Listado listado = new Listado();
+                listado.Show(Owner);
+                Close();
             }
             else
             {
@@ -65,7 +62,8 @@ namespace PrecargadoDeInformacion.GUI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            regresarAlListado();
+            Owner.Show();
+            Close();
         }
     }
 }

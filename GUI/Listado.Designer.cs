@@ -135,7 +135,7 @@
             Controls.Add(btnAlta);
             Controls.Add(dgv);
             Name = "Listado";
-            Text = "Form1";
+            Text = "Listado";
             Load += Listado_Load;
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);

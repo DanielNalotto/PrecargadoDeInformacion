@@ -16,6 +16,7 @@ namespace PrecargadoDeInformacion
 
         private void cargarDatos()
         {
+            dgv.Rows.Clear();
             List<Usuario> usuarios = usuario.obtenerUsuarios();
             foreach (var usuario in usuarios)
             {

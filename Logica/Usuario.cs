@@ -112,15 +112,36 @@ namespace PrecargadoDeInformacion.Logica
         {
             return !String.IsNullOrEmpty(calle);
         }
-    
-    
-    
+
+
+        /// -------------------------- CONEXION A BASE DE DATOS --------------------------------
         public List<Usuario> obtenerUsuarios()
         {
             return db.obtenerUsuarios();
         }
 
+        public bool crearUsuario(string nombre, string tel, string mail, string calle, string nroPuerta)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                usuario.Nombre = nombre;
+                usuario.Tel = Int32.Parse(tel);
+                usuario.Mail = mail;
+                usuario.Calle = calle;
+                usuario.NroPuerta = Int32.Parse(nroPuerta);
+                return ingresarUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
+        private bool ingresarUsuario(Usuario usuario)
+        {
+            return db.ingresarUsuario(usuario.Nombre, usuario.Tel, usuario.Mail, usuario.Calle, usuario.NroPuerta);
+        }
 
 
     }

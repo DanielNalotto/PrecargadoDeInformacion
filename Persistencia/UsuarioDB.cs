@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using PrecargadoDeInformacion.Logica;
 using MySqlConnector;
+using Org.BouncyCastle.Utilities.Collections;
 
 namespace PrecargadoDeInformacion.Persistencia
 {
@@ -45,29 +46,26 @@ namespace PrecargadoDeInformacion.Persistencia
             return usuarios;
         }
 
-
-        /*
-        public List<Usuario> obtenerUsuarios()
+        public bool ingresarUsuario(string nombre, int tel, string mail, string calle, int nroPuerta)
         {
-            MySqlConnection conexion = new MySqlConnection(cadenaConexion);
-            conexion.Open();
-
-            string query = "SELECT id, nombre, tel, mail, calle, nroPuerta FROM usuario;";
-            MySqlCommand command = new MySqlCommand (query, conexion);
-            
-            using MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                int id = reader.GetInt32("id");
-                string nombre = reader.GetString("nombre");
-                int tel = reader.GetInt32("tel");
-                string mail = reader.GetString("mail");
-                string calle = reader.GetString("calle");
-                int nroPuerta = reader.GetInt32("nroPuerta");
-                usuario = new Usuario(id, nombre, tel, mail, calle, nroPuerta);
-                usuarios.Add(usuario);
+                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+                conexion.Open();
+
+                string query = "INSERT INTO usuario(nombre, tel, mail, calle, nroPuerta) VALUES('" +
+                    nombre + "', " + tel + ", '" + mail + "', '" + calle + "', " + nroPuerta + ");";
+
+                MySqlCommand command = new MySqlCommand(query, conexion);
+                command.ExecuteNonQuery();
+                conexion.Close();
+                return true;
             }
-            return usuarios;
-        }*/
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        
     }
 }
