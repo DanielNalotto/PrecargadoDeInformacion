@@ -58,6 +58,7 @@
             btnMod.TabIndex = 6;
             btnMod.Text = "Modificación";
             btnMod.UseVisualStyleBackColor = true;
+            btnMod.Click += btnMod_Click;
             // 
             // btnAlta
             // 

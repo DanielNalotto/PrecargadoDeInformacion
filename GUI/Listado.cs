@@ -15,5 +15,12 @@ namespace PrecargadoDeInformacion
             agregarUsuario.Show(this);
             Hide();
         }
+
+        private void btnMod_Click(object sender, EventArgs e)
+        {
+            AgregarUsuario agregarUsuario = new AgregarUsuario();
+            agregarUsuario.Show(this);
+            Hide();
+        }
     }
 }
