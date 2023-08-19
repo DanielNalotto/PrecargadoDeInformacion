@@ -7,14 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PrecargadoDeInformacion.Logica;
 
 namespace PrecargadoDeInformacion.GUI
 {
     public partial class AgregarUsuario : Form
     {
+        Usuario usuario;
+        
         public AgregarUsuario()
         {
+            usuario = new Usuario();
             InitializeComponent();
+        }
+
+        public AgregarUsuario(string user, string tel, string mail, string calle, string nroPuerta)
+        {
+            InitializeComponent();
+            usuario = new Usuario();
+            cargarInformacion(user, tel, mail, calle, nroPuerta);
+        }
+
+        private void cargarInformacion(string user, string tel, string mail, string calle, string nroPuerta)
+        {
+            txtUser.Text = user;
+            txtTel.Text = tel;
+            txtMail.Text = mail;
+            txtCalle.Text = calle;
+            txtNroPuerta.Text = nroPuerta;
         }
 
         private void regresarAlListado()
@@ -25,14 +45,22 @@ namespace PrecargadoDeInformacion.GUI
 
         private void btnMasInfo_Click(object sender, EventArgs e)
         {
-            InformacionUsuario informacionUsuario = new InformacionUsuario();
+            InformacionUsuario informacionUsuario = new InformacionUsuario(txtUser.Text);
             informacionUsuario.Show(Owner);
             Close();
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            regresarAlListado();
+            if (usuario.validarNombre(txtUser.Text))
+            {
+                MessageBox.Show("Se guardaron los datos");
+                regresarAlListado();
+            }
+            else
+            {
+                MessageBox.Show("No se guardaron los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
