@@ -1,16 +1,33 @@
-﻿using System;
+﻿using PrecargadoDeInformacion.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using PrecargadoDeInformacion.Persistencia;
 
 namespace PrecargadoDeInformacion.Logica
 {
     internal class Usuario
     {
+        UsuarioDB db = new UsuarioDB();
         private string nombre, mail, calle;
         private int id, tel, nroPuerta;
+
+        /// -------------------------- CONSTRUCTORES --------------------------------
+        public Usuario() {}
+
+        public Usuario(int id, string nombre, int tel, string mail, string calle, int nroPuerta)
+        {
+            this.id = id;
+            this.nombre = nombre;
+            this.tel = tel;
+            this.mail = mail;
+            this.calle = calle;
+            this.nroPuerta = nroPuerta;
+        }
+
 
         /// -------------------------- GETTERS --------------------------------
         public string Nombre
@@ -98,9 +115,13 @@ namespace PrecargadoDeInformacion.Logica
     
     
     
-    
-    
-    
-    
+        public List<Usuario> obtenerUsuarios()
+        {
+            return db.obtenerUsuarios();
+        }
+
+
+
+
     }
 }

@@ -31,19 +31,19 @@
             btnBaja = new Button();
             btnMod = new Button();
             btnAlta = new Button();
-            dataGridView1 = new DataGridView();
+            dgv = new DataGridView();
             colId = new DataGridViewTextBoxColumn();
             colUser = new DataGridViewTextBoxColumn();
             colTel = new DataGridViewTextBoxColumn();
             colMail = new DataGridViewTextBoxColumn();
             colCalle = new DataGridViewTextBoxColumn();
             colNroPuerta = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             SuspendLayout();
             // 
             // btnBaja
             // 
-            btnBaja.Location = new Point(276, 340);
+            btnBaja.Location = new Point(330, 341);
             btnBaja.Name = "btnBaja";
             btnBaja.Size = new Size(118, 33);
             btnBaja.TabIndex = 7;
@@ -52,7 +52,7 @@
             // 
             // btnMod
             // 
-            btnMod.Location = new Point(541, 340);
+            btnMod.Location = new Point(640, 340);
             btnMod.Name = "btnMod";
             btnMod.Size = new Size(118, 33);
             btnMod.TabIndex = 6;
@@ -70,67 +70,74 @@
             btnAlta.UseVisualStyleBackColor = true;
             btnAlta.Click += btnAlta_Click;
             // 
-            // dataGridView1
+            // dgv
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colId, colUser, colTel, colMail, colCalle, colNroPuerta });
-            dataGridView1.Location = new Point(12, 12);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(647, 310);
-            dataGridView1.TabIndex = 4;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv.Columns.AddRange(new DataGridViewColumn[] { colId, colUser, colTel, colMail, colCalle, colNroPuerta });
+            dgv.Location = new Point(12, 12);
+            dgv.MultiSelect = false;
+            dgv.Name = "dgv";
+            dgv.ReadOnly = true;
+            dgv.RowTemplate.Height = 25;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.Size = new Size(746, 310);
+            dgv.TabIndex = 4;
             // 
             // colId
             // 
             colId.HeaderText = "Id";
             colId.Name = "colId";
             colId.ReadOnly = true;
+            colId.Width = 40;
             // 
             // colUser
             // 
             colUser.HeaderText = "User";
             colUser.Name = "colUser";
             colUser.ReadOnly = true;
+            colUser.Width = 130;
             // 
             // colTel
             // 
             colTel.HeaderText = "Tel";
             colTel.Name = "colTel";
             colTel.ReadOnly = true;
+            colTel.Width = 120;
             // 
             // colMail
             // 
             colMail.HeaderText = "Mail";
             colMail.Name = "colMail";
             colMail.ReadOnly = true;
+            colMail.Width = 150;
             // 
             // colCalle
             // 
             colCalle.HeaderText = "Calle";
             colCalle.Name = "colCalle";
             colCalle.ReadOnly = true;
+            colCalle.Width = 150;
             // 
             // colNroPuerta
             // 
             colNroPuerta.HeaderText = "Nº puerta";
             colNroPuerta.Name = "colNroPuerta";
             colNroPuerta.ReadOnly = true;
+            colNroPuerta.Width = 110;
             // 
             // Listado
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(671, 386);
+            ClientSize = new Size(770, 386);
             Controls.Add(btnBaja);
             Controls.Add(btnMod);
             Controls.Add(btnAlta);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgv);
             Name = "Listado";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += Listado_Load;
+            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);
         }
 
@@ -139,7 +146,7 @@
         private Button btnBaja;
         private Button btnMod;
         private Button btnAlta;
-        private DataGridView dataGridView1;
+        private DataGridView dgv;
         private DataGridViewTextBoxColumn colId;
         private DataGridViewTextBoxColumn colUser;
         private DataGridViewTextBoxColumn colTel;
