@@ -63,5 +63,14 @@ namespace PrecargadoDeInformacion
         {
             cargarDatos();
         }
+
+        private void btnBaja_Click(object sender, EventArgs e)
+        {
+            Usuario usuario = seleccionarUsuario();
+            DialogResult respuesta = MessageBox.Show("¿Desea eliminar a " + usuario.Nombre + " de la base de datos?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (respuesta == DialogResult.Yes)
+                usuario.borrar();
+            cargarDatos();
+        }
     }
 }

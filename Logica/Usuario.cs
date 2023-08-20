@@ -156,5 +156,11 @@ namespace PrecargadoDeInformacion.Logica
         {
             return db.modificarUsuario(usuario);
         }
+        
+        public bool borrar()
+        {
+            return db.borrarUsuario(Id);
+        }
+
     }
 }

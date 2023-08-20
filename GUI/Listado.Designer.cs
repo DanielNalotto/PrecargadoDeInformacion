@@ -49,6 +49,7 @@
             btnBaja.TabIndex = 7;
             btnBaja.Text = "Baja";
             btnBaja.UseVisualStyleBackColor = true;
+            btnBaja.Click += btnBaja_Click;
             // 
             // btnMod
             // 

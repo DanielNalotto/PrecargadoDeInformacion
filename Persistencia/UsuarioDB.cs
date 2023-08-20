@@ -16,8 +16,6 @@ namespace PrecargadoDeInformacion.Persistencia
         Usuario usuario;
         private string cadenaConexion = "Server=localhost;Database=precargadoinformacion;Uid=root;Pwd=;";
 
-
-
         public List<Usuario> obtenerUsuarios()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -69,7 +67,6 @@ namespace PrecargadoDeInformacion.Persistencia
             }
         }
         
-
         public bool modificarUsuario(Usuario usuario)
         {
             try
@@ -89,10 +86,8 @@ namespace PrecargadoDeInformacion.Persistencia
                     command.Parameters.AddWithValue("@id", usuario.Id);
 
                     string mensaje = usuario.Nombre + "\n" + usuario.Tel.ToString() + "\n" + usuario.Mail + "\n" + usuario.Calle + "\n" + usuario.NroPuerta.ToString() + "\n" + usuario.Id.ToString();
-                    MessageBox.Show(mensaje);
 
                     int filasAfectadas = command.ExecuteNonQuery();
-                    MessageBox.Show(filasAfectadas.ToString());
 
                     conexion.Close();
                     return filasAfectadas > 0;
@@ -104,5 +99,26 @@ namespace PrecargadoDeInformacion.Persistencia
             }
         }
 
+        public bool borrarUsuario(int id)
+        {
+            try
+            {
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+                    string query = "DELETE FROM usuario WHERE id=@id;";
+
+                    MySqlCommand command = new MySqlCommand(query, conexion);
+                    command.Parameters.AddWithValue("@id", id);
+
+                    int rowsAfected = command.ExecuteNonQuery();
+                    return rowsAfected > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
