@@ -41,7 +41,11 @@ namespace PrecargadoDeInformacion.GUI
         }
         private void regresarAgregarUsuario(Usuario newUser)
         {
-            AgregarUsuario agregarUsuario = new AgregarUsuario(newUser.Nombre, newUser.Tel, newUser.Mail, newUser.Calle, newUser.NroPuerta, this.ingresar);
+            AgregarUsuario agregarUsuario;
+            if (this.ingresar)
+                agregarUsuario = new AgregarUsuario(newUser.Nombre, newUser.Tel, newUser.Mail, newUser.Calle, newUser.NroPuerta, this.ingresar);
+            else
+                agregarUsuario = new AgregarUsuario(usuario.Id, newUser.Nombre, newUser.Tel, newUser.Mail, newUser.Calle, newUser.NroPuerta, this.ingresar);
             agregarUsuario.Show(Owner);
             Close();
         }

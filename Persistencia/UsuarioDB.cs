@@ -74,24 +74,34 @@ namespace PrecargadoDeInformacion.Persistencia
         {
             try
             {
-                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
-                conexion.Open();
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
 
-                string query = "UPDATE usuario SET nombre = '" + usuario.Nombre + "', tel = " + usuario.Tel + ", mail = '" +
-                usuario.Mail + "', calle = '" + usuario.Calle + "', nroPuerta = " + usuario.NroPuerta + " WHERE id = " + usuario.Id + ";";
+                    string query = "UPDATE usuario SET nombre=@nombre, tel=@tel, mail=@mail, calle=@calle, nroPuerta=@nroPuerta WHERE id=@id;";
 
-                MySqlCommand command = new MySqlCommand(query, conexion);
+                    MySqlCommand command = new MySqlCommand(query, conexion);
+                    command.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                    command.Parameters.AddWithValue("@tel", usuario.Tel);
+                    command.Parameters.AddWithValue("@mail", usuario.Mail);
+                    command.Parameters.AddWithValue("@calle", usuario.Calle);
+                    command.Parameters.AddWithValue("@nroPuerta", usuario.NroPuerta);
+                    command.Parameters.AddWithValue("@id", usuario.Id);
 
-                command.ExecuteNonQuery();
-                conexion.Close();
-                return true;
+                    string mensaje = usuario.Nombre + "\n" + usuario.Tel.ToString() + "\n" + usuario.Mail + "\n" + usuario.Calle + "\n" + usuario.NroPuerta.ToString() + "\n" + usuario.Id.ToString();
+                    MessageBox.Show(mensaje);
+
+                    int filasAfectadas = command.ExecuteNonQuery();
+                    MessageBox.Show(filasAfectadas.ToString());
+
+                    conexion.Close();
+                    return filasAfectadas > 0;
+                }
             }
             catch (Exception ex)
             {
                 return false;
             }
-            
-
         }
 
     }
