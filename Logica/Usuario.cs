@@ -90,10 +90,8 @@ namespace PrecargadoDeInformacion.Logica
        
         public bool validarMail(string mail)
         {
-            if (Regex.IsMatch(mail, "[.@_a-z0-9-]"))
-                return true;
-            else
-                return false;
+            string patron = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(mail, patron);
         }
        
         public bool validarNroPuerta(string nroPuerta)
