@@ -22,7 +22,7 @@ namespace PrecargadoDeInformacion.Persistencia
         {
             List<Usuario> usuarios = new List<Usuario>();
 
-            MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+            using MySqlConnection conexion = new MySqlConnection(cadenaConexion);
             conexion.Open();
 
             string query = "SELECT id, nombre, tel, mail, calle, nroPuerta FROM usuario;";
@@ -44,6 +44,7 @@ namespace PrecargadoDeInformacion.Persistencia
 
                 usuarios.Add(usuario);
             }
+            conexion.Close();
             return usuarios;
         }
 
@@ -82,6 +83,7 @@ namespace PrecargadoDeInformacion.Persistencia
                 MySqlCommand command = new MySqlCommand(query, conexion);
 
                 command.ExecuteNonQuery();
+                conexion.Close();
                 return true;
             }
             catch (Exception ex)

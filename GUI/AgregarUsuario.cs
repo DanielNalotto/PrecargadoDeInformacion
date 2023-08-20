@@ -13,7 +13,7 @@ namespace PrecargadoDeInformacion.GUI
 {
     public partial class AgregarUsuario : Form
     {
-        Usuario usuario = new Usuario();
+        Usuario usuario;
         bool ingresar;
         
         public AgregarUsuario(bool ingresar)
@@ -26,6 +26,7 @@ namespace PrecargadoDeInformacion.GUI
         public AgregarUsuario(string user, int tel, string mail, string calle, int nroPuerta, bool ingresar)
         {
             InitializeComponent();
+            usuario = new Usuario();
             usuario.Nombre = user;
             usuario.Tel = tel;
             usuario.Mail = mail;
@@ -38,6 +39,7 @@ namespace PrecargadoDeInformacion.GUI
         public AgregarUsuario(int id, string user, int tel, string mail, string calle, int nroPuerta, bool ingresar)
         {
             InitializeComponent();
+            usuario = new Usuario();
             usuario.Id = id;
             usuario.Nombre = user;
             usuario.Tel = tel;
@@ -65,7 +67,17 @@ namespace PrecargadoDeInformacion.GUI
 
         private void btnMasInfo_Click(object sender, EventArgs e)
         {
-            InformacionUsuario informacionUsuario = new InformacionUsuario(usuario.Id, usuario.Nombre, usuario.Tel, usuario.Mail, usuario.Calle, usuario.NroPuerta);
+            InformacionUsuario informacionUsuario;
+            if (this.ingresar)
+            {
+                usuario = usuario.crearUsuario(txtUser.Text, txtTel.Text, txtMail.Text, txtCalle.Text, txtNroPuerta.Text);
+                informacionUsuario = new InformacionUsuario(usuario.Nombre, usuario.Tel, usuario.Mail, usuario.Calle, usuario.NroPuerta, this.ingresar);
+            }
+            else
+            {
+                informacionUsuario = new InformacionUsuario(usuario.Id, usuario.Nombre, usuario.Tel, usuario.Mail, usuario.Calle, usuario.NroPuerta, this.ingresar);
+            }
+
             informacionUsuario.Show(Owner);
             Close();
         }

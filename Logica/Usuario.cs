@@ -125,10 +125,25 @@ namespace PrecargadoDeInformacion.Logica
         {
             Usuario usuario = new Usuario();
             usuario.Nombre = nombre;
-            usuario.Tel = Int32.Parse(tel);
             usuario.Mail = mail;
             usuario.Calle = calle;
-            usuario.NroPuerta = Int32.Parse(nroPuerta);
+
+            try
+            {
+                usuario.Tel = Int32.Parse(tel);
+            } catch (Exception ex)
+            {
+                usuario.Tel = 0;
+            }
+            try
+            {
+                usuario.NroPuerta = Int32.Parse(nroPuerta);
+            }
+            catch (Exception ex)
+            {
+                usuario.NroPuerta = 0;
+            }
+            
             return usuario;
         }
 

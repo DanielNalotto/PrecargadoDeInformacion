@@ -39,10 +39,9 @@ namespace PrecargadoDeInformacion.GUI
             this.ingresar = ingresar;
             cargarDatos();
         }
-
-        private void regresarAgregarUsuario()
+        private void regresarAgregarUsuario(Usuario newUser)
         {
-            AgregarUsuario agregarUsuario = new AgregarUsuario(this.ingresar);
+            AgregarUsuario agregarUsuario = new AgregarUsuario(newUser.Nombre, newUser.Tel, newUser.Mail, newUser.Calle, newUser.NroPuerta, this.ingresar);
             agregarUsuario.Show(Owner);
             Close();
         }
@@ -80,16 +79,14 @@ namespace PrecargadoDeInformacion.GUI
         {
             if (validarDatos())
             {
-                Usuario newUser = usuario.crearUsuario(txtNombre.Text, txtTel.Text, txtMail.Text, txtCalle.Text, txtPuerta.Text);
-                AgregarUsuario agregarUsuario = new AgregarUsuario(newUser.Nombre, newUser.Tel, newUser.Mail, newUser.Calle, newUser.NroPuerta, this.ingresar);
-                agregarUsuario.Show(Owner);
-                Close();
+                Usuario newUser = usuario.crearUsuario(usuario.Nombre, txtTel.Text, txtMail.Text, txtCalle.Text, txtPuerta.Text);
+                regresarAgregarUsuario(newUser);
             }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            regresarAgregarUsuario();
+            regresarAgregarUsuario(usuario);
         }
     }
 }
